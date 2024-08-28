@@ -11,13 +11,20 @@ Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Sub ${AWS::StackName}-UserPool
+      UserPoolName: CustomizeUnicorn-users
       AutoVerifiedAttributes:
         - email
+  CongintoUserPoolGroup:
+    Type: AWS::Cognito::UserPoolGroup
+    Properties:
+      Description: Admin user group to manage partners
+      GroupName: admin
+      UserPoolId: !Ref CognitoUserPool
+
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: my-app
+      ClientName: admin-client
       GenerateSecret: false
       UserPoolId: !Ref CognitoUserPool
       ExplicitAuthFlows:
@@ -27,21 +34,21 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /serverless-shopping-cart-demo/auth/user-pool-id
+      Name: /serverless-security-workshop/auth/user-pool-id
       Value: !Ref CognitoUserPool
 
   UserPoolARNSSM:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /serverless-shopping-cart-demo/auth/user-pool-arn
+      Name: /serverless-security-workshop/auth/user-pool-arn
       Value: !GetAtt CognitoUserPool.Arn
 
   UserPoolAppClientSSM:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /serverless-shopping-cart-demo/auth/user-pool-client-id
+      Name: /serverless-security-workshop/auth/user-pool-client-id
       Value: !Ref UserPoolClient
 
 Outputs:

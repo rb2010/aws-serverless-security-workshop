@@ -82,7 +82,7 @@ function deployapp() {
     cd ~/environment/aws-serverless-security-workshop/src/app
     npm install
     cd  ~/environment/aws-serverless-security-workshop/src
-    sam deploy --stack-name CustomizeUnicorns --s3-bucket $DeploymentS3Bucket --capabilities CAPABILITY_IAM || true
+    sam deploy --stack-name CustomizeUnicorns --s3-bucket $DeploymentS3Bucket --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND || true
     cd  ~/environment/aws-serverless-security-workshop/
 
 }

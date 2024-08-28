@@ -18,10 +18,10 @@ Parameters:
     Default: Secure-Serverless
   UserPoolArn:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/serverless-shopping-cart-demo/auth/user-pool-arn'
+    Default: '/serverless-security-workshop/auth/user-pool-arn'
   UserPoolId:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/serverless-shopping-cart-demo/auth/user-pool-id'
+    Default: '/serverless-security-workshop/auth/user-pool-id'
 
 Resources:
   # CognitoUserPool:

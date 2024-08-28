@@ -18,12 +18,12 @@ Parameters:
     Default: Secure-Serverless
   UserPoolArn:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/serverless-shopping-cart-demo/auth/user-pool-arn'
+    Default: '/serverless-security-workshop/auth/user-pool-arn'
   UserPoolId:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/serverless-shopping-cart-demo/auth/user-pool-id'
+    Default: '/serverless-security-workshop/auth/user-pool-id'
 
-# Resources:
+Resources:
 #   CognitoUserPool:
 #     Type: "AWS::Cognito::UserPool"
 #     Properties:
@@ -79,7 +79,7 @@ Parameters:
               Ref: UnicornPartnerApi
       Environment:
         Variables:
-          USER_POOL_ID: !Ref CognitoUserPool
+          USER_POOL_ID: !Ref UserPoolId
           PARTNER_DDB_TABLE: !Ref PartnerDDBTable
 
   UnicornPartnerApi:
@@ -134,4 +134,4 @@ Parameters:
 Outputs:
   ApiURL:
     Description: "API endpoint URL for dev environment"
-    Value: !Sub "https://${UnicornApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
+    Value: !Sub "https://${UnicornPartnerApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
